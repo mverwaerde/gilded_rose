@@ -30,6 +30,10 @@ public class Item {
         return this.name.equals("Backstage passes to a TAFKAL80ETC concert");
     }
 
+    public boolean isNotBackstagePasses() {
+        return !this.name.equals("Backstage passes to a TAFKAL80ETC concert");
+    }
+
     public boolean isNotSulfuras() {
         return !this.name.equals("Sulfuras, Hand of Ragnaros");
     }
@@ -53,6 +57,10 @@ public class Item {
 
     public boolean hasSellInExpired(){
         return this.sellIn < 0;
+    }
+
+    public void decreaseSellInDays(){
+        this.sellIn = this.sellIn - 1;
     }
 
 

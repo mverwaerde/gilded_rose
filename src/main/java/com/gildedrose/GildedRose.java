@@ -2,7 +2,7 @@ package com.gildedrose;
 
 class GildedRose {
 
-    Item[] items;
+    private Item[] items;
 
     public GildedRose(Item[] items) {
         this.items = items;
@@ -10,37 +10,35 @@ class GildedRose {
 
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
-            if (items[i].isNotAgedBrie() && !items[i].isBackstagePasses()) {
-                if (items[i].hasPositiveQuality() && items[i].isNotSulfuras()) {
-                    items[i].decreaseQuality();
-                }
-            } else {
-                if (items[i].hasLowerQualityThanMaxAuthorizedQuality()) {
-                    items[i].increaseQuality();
+            if (items[i].isNotSulfuras()) {
+                if (items[i].isNotAgedBrie() && items[i].isNotBackstagePasses()) {
+                    if (items[i].hasPositiveQuality()) {
+                        items[i].decreaseQuality();
+                    }
+                } else {
+                    if (items[i].hasLowerQualityThanMaxAuthorizedQuality()) {
+                        items[i].increaseQuality();
 
-                    if (items[i].isBackstagePasses()) {
-                        manageBackstagePassesQuality(items[i]);
+                        if (items[i].isBackstagePasses()) {
+                            manageBackstagePassesQuality(items[i]);
+                        }
                     }
                 }
-            }
 
-            if (items[i].isNotSulfuras()) {
-                items[i].sellIn = items[i].sellIn - 1;
-            }
+                items[i].decreaseSellInDays();
 
-            if (items[i].hasSellInExpired()) {
-                manageSellInExpiredItem(items[i]);
+                if (items[i].hasSellInExpired()) {
+                    manageSellInExpiredItem(items[i]);
+                }
             }
         }
     }
 
     private void manageSellInExpiredItem(Item item) {
         if (item.isNotAgedBrie()) {
-            if (!item.isBackstagePasses()) {
+            if (item.isNotBackstagePasses()) {
                 if (item.hasPositiveQuality()) {
-                    if (item.isNotSulfuras()) {
-                        item.decreaseQuality();
-                    }
+                    item.decreaseQuality();
                 }
             } else {
                 item.quality = item.quality - item.quality;
