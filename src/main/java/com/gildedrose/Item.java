@@ -2,11 +2,13 @@ package com.gildedrose;
 
 public class Item {
 
-    public String name;
+    private String name;
 
     public int sellIn;
 
     public int quality;
+
+    private static int maxAuthorizedQuality = 50;
 
     public Item(String name, int sellIn, int quality) {
         this.name = name;
@@ -34,6 +36,11 @@ public class Item {
 
     public boolean hasPositiveQuality() {
         return this.quality > 0;
+    }
+
+    public boolean hasLowerQualityThanMaxAuthorizedQuality(){
+        maxAuthorizedQuality = 50;
+        return this.quality < maxAuthorizedQuality;
     }
 
     public void increaseQuality() {
