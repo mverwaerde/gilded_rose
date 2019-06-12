@@ -19,6 +19,7 @@ public class Item {
         return this.name + ", " + this.sellIn + ", " + this.quality;
     }
 
+
     public boolean isAgedBrie() {
         return this.name.equals("Aged Brie");
     }
@@ -30,4 +31,18 @@ public class Item {
     public boolean isSulfuras() {
         return this.name.equals("Sulfuras, Hand of Ragnaros");
     }
+
+    public boolean hasPositiveQuality() {
+        return this.quality > 0;
+    }
+
+    public void increaseQuality() {
+        this.quality = this.quality + 1;
+    }
+
+    public void decreaseQuality() {
+        this.quality = this.quality - 1;
+    }
+
+
 }
