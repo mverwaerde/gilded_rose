@@ -1,5 +1,7 @@
 package com.gildedrose;
 
+import java.util.Arrays;
+
 class GildedRose {
 
     private Item[] items;
@@ -8,16 +10,16 @@ class GildedRose {
         this.items = items;
     }
 
-    public void updateQuality() {
-        for (int i = 0; i < items.length; i++) {
-            if (items[i].isNotSulfuras()) {
-                manageItemQuality(items[i]);
-                items[i].decreaseSellInDays();
+    public void updateItem() {
+        Arrays.stream(items).filter(Item::isNotSulfuras)
+                .forEach(this::manageItemQualityAndSellInDays);
+    }
 
-                if (items[i].hasSellInExpired()) {
-                    manageSellInExpiredItem(items[i]);
-                }
-            }
+    private void manageItemQualityAndSellInDays(Item item) {
+        manageItemQuality(item);
+        item.decreaseSellInDays();
+        if (item.hasSellInExpired()) {
+            manageQualityFromSellInExpiredItem(item);
         }
     }
 
@@ -37,7 +39,7 @@ class GildedRose {
         }
     }
 
-    private void manageSellInExpiredItem(Item item) {
+    private void manageQualityFromSellInExpiredItem(Item item) {
         if (item.isAgedBrie()) {
             if (item.hasLowerQualityThanMaxAuthorizedQuality()) {
                 item.increaseQuality();
