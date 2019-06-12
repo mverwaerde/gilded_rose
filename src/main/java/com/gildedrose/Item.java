@@ -22,23 +22,23 @@ public class Item {
     }
 
 
-    public boolean isAgedBrie() {
-        return this.name.equals("Aged Brie");
+    public boolean isNotAgedBrie() {
+        return !this.name.equals("Aged Brie");
     }
 
     public boolean isBackstagePasses() {
         return this.name.equals("Backstage passes to a TAFKAL80ETC concert");
     }
 
-    public boolean isSulfuras() {
-        return this.name.equals("Sulfuras, Hand of Ragnaros");
+    public boolean isNotSulfuras() {
+        return !this.name.equals("Sulfuras, Hand of Ragnaros");
     }
 
     public boolean hasPositiveQuality() {
         return this.quality > 0;
     }
 
-    public boolean hasLowerQualityThanMaxAuthorizedQuality(){
+    public boolean hasLowerQualityThanMaxAuthorizedQuality() {
         maxAuthorizedQuality = 50;
         return this.quality < maxAuthorizedQuality;
     }
@@ -49,6 +49,10 @@ public class Item {
 
     public void decreaseQuality() {
         this.quality = this.quality - 1;
+    }
+
+    public boolean hasSellInExpired(){
+        return this.sellIn < 0;
     }
 
 

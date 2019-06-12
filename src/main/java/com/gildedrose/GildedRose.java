@@ -10,8 +10,8 @@ class GildedRose {
 
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
-            if (!items[i].isAgedBrie() && !items[i].isBackstagePasses()) {
-                if (items[i].hasPositiveQuality() && !items[i].isSulfuras()) {
+            if (items[i].isNotAgedBrie() && !items[i].isBackstagePasses()) {
+                if (items[i].hasPositiveQuality() && items[i].isNotSulfuras()) {
                     items[i].decreaseQuality();
                 }
             } else {
@@ -19,41 +19,49 @@ class GildedRose {
                     items[i].increaseQuality();
 
                     if (items[i].isBackstagePasses()) {
-                        if (items[i].sellIn < 11) {
-                            if (items[i].hasLowerQualityThanMaxAuthorizedQuality()) {
-                                items[i].increaseQuality();
-                            }
-                        }
-
-                        if (items[i].sellIn < 6) {
-                            if (items[i].hasLowerQualityThanMaxAuthorizedQuality()) {
-                                items[i].increaseQuality();
-                            }
-                        }
+                        manageBackstagePassesQuality(items[i]);
                     }
                 }
             }
 
-            if (!items[i].isSulfuras()) {
+            if (items[i].isNotSulfuras()) {
                 items[i].sellIn = items[i].sellIn - 1;
             }
 
-            if (items[i].sellIn < 0) {
-                if (!items[i].isAgedBrie()) {
-                    if (!items[i].isBackstagePasses()) {
-                        if (items[i].hasPositiveQuality()) {
-                            if (!items[i].isSulfuras()) {
-                                items[i].decreaseQuality();
-                            }
-                        }
-                    } else {
-                        items[i].quality = items[i].quality - items[i].quality;
-                    }
-                } else {
-                    if (items[i].hasLowerQualityThanMaxAuthorizedQuality()) {
-                        items[i].increaseQuality();
+            if (items[i].hasSellInExpired()) {
+                manageSellInExpiredItem(items[i]);
+            }
+        }
+    }
+
+    private void manageSellInExpiredItem(Item item) {
+        if (item.isNotAgedBrie()) {
+            if (!item.isBackstagePasses()) {
+                if (item.hasPositiveQuality()) {
+                    if (item.isNotSulfuras()) {
+                        item.decreaseQuality();
                     }
                 }
+            } else {
+                item.quality = item.quality - item.quality;
+            }
+        } else {
+            if (item.hasLowerQualityThanMaxAuthorizedQuality()) {
+                item.increaseQuality();
+            }
+        }
+    }
+
+    private void manageBackstagePassesQuality(Item item) {
+        if (item.sellIn < 11) {
+            if (item.hasLowerQualityThanMaxAuthorizedQuality()) {
+                item.increaseQuality();
+            }
+        }
+
+        if (item.sellIn < 6) {
+            if (item.hasLowerQualityThanMaxAuthorizedQuality()) {
+                item.increaseQuality();
             }
         }
     }
