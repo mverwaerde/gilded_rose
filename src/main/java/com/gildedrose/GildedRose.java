@@ -11,24 +11,27 @@ class GildedRose {
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
             if (items[i].isNotSulfuras()) {
-                if (items[i].isNotAgedBrie() && items[i].isNotBackstagePasses()) {
-                    if (items[i].hasPositiveQuality()) {
-                        items[i].decreaseQuality();
-                    }
-                } else {
-                    if (items[i].hasLowerQualityThanMaxAuthorizedQuality()) {
-                        items[i].increaseQuality();
-
-                        if (items[i].isBackstagePasses()) {
-                            manageBackstagePassesQuality(items[i]);
-                        }
-                    }
-                }
-
+                manageItemQuality(items[i]);
                 items[i].decreaseSellInDays();
 
                 if (items[i].hasSellInExpired()) {
                     manageSellInExpiredItem(items[i]);
+                }
+            }
+        }
+    }
+
+    private void manageItemQuality(Item item) {
+        if (item.isNotAgedBrie() && item.isNotBackstagePasses()) {
+            if (item.hasPositiveQuality()) {
+                item.decreaseQuality();
+            }
+        } else {
+            if (item.hasLowerQualityThanMaxAuthorizedQuality()) {
+                item.increaseQuality();
+
+                if (item.isBackstagePasses()) {
+                    manageBackstagePassesQuality(item);
                 }
             }
         }
