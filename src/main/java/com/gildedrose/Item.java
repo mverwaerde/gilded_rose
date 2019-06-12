@@ -26,6 +26,10 @@ public class Item {
         return !this.name.equals("Aged Brie");
     }
 
+    public boolean isAgedBrie() {
+        return this.name.equals("Aged Brie");
+    }
+
     public boolean isBackstagePasses() {
         return this.name.equals("Backstage passes to a TAFKAL80ETC concert");
     }
@@ -55,11 +59,11 @@ public class Item {
         this.quality = this.quality - 1;
     }
 
-    public boolean hasSellInExpired(){
+    public boolean hasSellInExpired() {
         return this.sellIn < 0;
     }
 
-    public void decreaseSellInDays(){
+    public void decreaseSellInDays() {
         this.sellIn = this.sellIn - 1;
     }
 

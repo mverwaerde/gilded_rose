@@ -35,33 +35,28 @@ class GildedRose {
     }
 
     private void manageSellInExpiredItem(Item item) {
-        if (item.isNotAgedBrie()) {
-            if (item.isNotBackstagePasses()) {
-                if (item.hasPositiveQuality()) {
-                    item.decreaseQuality();
-                }
-            } else {
-                item.quality = item.quality - item.quality;
-            }
-        } else {
+        if (item.isAgedBrie()) {
             if (item.hasLowerQualityThanMaxAuthorizedQuality()) {
                 item.increaseQuality();
+            }
+        } else {
+            if (item.isNotBackstagePasses() && item.hasPositiveQuality()) {
+                item.decreaseQuality();
+            } else {
+                item.quality = item.quality - item.quality;
             }
         }
     }
 
     private void manageBackstagePassesQuality(Item item) {
-        if (item.sellIn < 11) {
-            if (item.hasLowerQualityThanMaxAuthorizedQuality()) {
+        if (item.hasLowerQualityThanMaxAuthorizedQuality()) {
+            if (item.sellIn < 11) {
                 item.increaseQuality();
             }
-        }
 
-        if (item.sellIn < 6) {
-            if (item.hasLowerQualityThanMaxAuthorizedQuality()) {
+            if (item.sellIn < 6) {
                 item.increaseQuality();
             }
         }
     }
-
 }
