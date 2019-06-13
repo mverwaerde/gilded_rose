@@ -25,11 +25,8 @@ public class SulfurasQualityControlTest {
 
     @Test
     public void shouldNotDecreaseQuality_whenSulfuraItem() {
-        // Arrange
         Item sulfuraItem = new Item("Sulfuras, Hand of Ragnaros", 10, 10);
-        // Act
         sulfurasQualityControl.updateQualityFor(sulfuraItem);
-        // Assert
         assertThat(sulfuraItem.getQuality()).isEqualTo(10);
     }
 }

@@ -10,6 +10,5 @@ public class SulfurasQualityControl implements QualityControl {
 
     @Override
     public void updateQualityFor(Item item) {
-
     }
 }
