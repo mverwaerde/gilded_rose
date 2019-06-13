@@ -1,14 +1,16 @@
 package com.gildedrose;
 
-import org.junit.Ignore;
-import org.junit.Test;
+
+
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class GildedRoseTest {
 
     @Test
-    @Ignore
+    @Disabled
     public void dummyTest() {
         Item[] items = new Item[]{new Item("Aged Brie", 0, 1)};
         GildedRose app = new GildedRose(items);
