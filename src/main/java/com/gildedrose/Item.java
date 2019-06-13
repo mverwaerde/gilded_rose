@@ -42,7 +42,11 @@ public class Item {
     }
 
     public boolean isNotSulfuras() {
-        return !this.name.equals(SULFURAS_HAND_OF_RAGNAROS);
+        return !this.isSulfuras();
+    }
+
+    public boolean isSulfuras() {
+        return this.name.equals(SULFURAS_HAND_OF_RAGNAROS);
     }
 
     public boolean hasPositiveQuality() {
@@ -85,9 +89,5 @@ public class Item {
 
     public void setQuality(int quality) {
         this.quality = quality;
-    }
-
-    public String getName() {
-        return name;
     }
 }
