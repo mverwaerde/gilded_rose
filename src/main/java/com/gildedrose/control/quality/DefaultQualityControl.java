@@ -1,10 +1,17 @@
-package com.gildedrose;
+package com.gildedrose.control.quality;
+
+import com.gildedrose.Item;
 
 import java.util.Optional;
 
 public class DefaultQualityControl implements QualityControl {
 
     private static int DROP_QUALITY_VALUE = 1;
+
+    @Override
+    public boolean isApplicable(Item item) {
+        return item.isDefaultItem();
+    }
 
     @Override
     public void updateQualityFor(Item item) {
@@ -23,6 +30,9 @@ public class DefaultQualityControl implements QualityControl {
     }
 
     private int dropQualityValue(Item item) {
-        return item.hasSellInExpired() ? DROP_QUALITY_VALUE * 2 : DROP_QUALITY_VALUE;
+        if (item.hasSellInExpired()) {
+            return DROP_QUALITY_VALUE * 2;
+        }
+        return DROP_QUALITY_VALUE;
     }
 }

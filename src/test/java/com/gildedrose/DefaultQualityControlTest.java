@@ -1,6 +1,7 @@
 package com.gildedrose;
 
 
+import com.gildedrose.control.quality.DefaultQualityControl;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -34,5 +35,23 @@ public class DefaultQualityControlTest {
         defaultQualityControl.updateQualityFor(expiredItem);
 
         assertThat(expiredItem.getQuality()).isEqualTo(4);
+    }
+
+    @Test
+    public void shouldBeApplicable_whenItemsNameIsNotSpecialItemName() {
+        Item defaultItem = new Item("defaultItem", -1, 6);
+
+        boolean result = defaultQualityControl.isApplicable(defaultItem);
+
+        assertThat(result).isTrue();
+    }
+
+    @Test
+    public void shouldNotBeApplicable_whenItemsNameIsSpecialItemName() {
+        Item defaultItem = new Item("Aged Brie", -1, 6);
+
+        boolean result = defaultQualityControl.isApplicable(defaultItem);
+
+        assertThat(result).isFalse();
     }
 }

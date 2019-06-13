@@ -1,7 +1,12 @@
 package com.gildedrose;
 
+import java.util.List;
+
 public class Item {
 
+    public static final String AGED_BRIE = "Aged Brie";
+    public static final String BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT = "Backstage passes to a TAFKAL80ETC concert";
+    public static final String SULFURAS_HAND_OF_RAGNAROS = "Sulfuras, Hand of Ragnaros";
     private String name;
 
     public int sellIn;
@@ -21,27 +26,32 @@ public class Item {
 
 
     public boolean isNotAgedBrie() {
-        return !this.name.equals("Aged Brie");
+        return !isAgedBrie();
     }
 
     public boolean isAgedBrie() {
-        return this.name.equals("Aged Brie");
+        return this.name.equals(AGED_BRIE);
     }
 
     public boolean isBackstagePasses() {
-        return this.name.equals("Backstage passes to a TAFKAL80ETC concert");
+        return this.name.equals(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT);
     }
 
     public boolean isNotBackstagePasses() {
-        return !this.name.equals("Backstage passes to a TAFKAL80ETC concert");
+        return !this.isBackstagePasses();
     }
 
     public boolean isNotSulfuras() {
-        return !this.name.equals("Sulfuras, Hand of Ragnaros");
+        return !this.name.equals(SULFURAS_HAND_OF_RAGNAROS);
     }
 
     public boolean hasPositiveQuality() {
         return this.quality > 0;
+    }
+
+    public boolean isDefaultItem() {
+        List<String> specialItems = List.of(AGED_BRIE, BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT, SULFURAS_HAND_OF_RAGNAROS);
+        return specialItems.stream().noneMatch(s -> s.equals(this.name));
     }
 
     public boolean hasLowerQualityThanMaxAuthorizedQuality() {
@@ -75,5 +85,9 @@ public class Item {
 
     public void setQuality(int quality) {
         this.quality = quality;
+    }
+
+    public String getName() {
+        return name;
     }
 }
