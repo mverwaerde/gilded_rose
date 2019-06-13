@@ -8,8 +8,6 @@ public class Item {
 
     public int quality;
 
-    private static int maxAuthorizedQuality = 50;
-
     public Item(String name, int sellIn, int quality) {
         this.name = name;
         this.sellIn = sellIn;
@@ -47,7 +45,7 @@ public class Item {
     }
 
     public boolean hasLowerQualityThanMaxAuthorizedQuality() {
-        maxAuthorizedQuality = 50;
+        int maxAuthorizedQuality = 50;
         return this.quality < maxAuthorizedQuality;
     }
 
@@ -67,5 +65,15 @@ public class Item {
         this.sellIn = this.sellIn - 1;
     }
 
+    public int getSellIn() {
+        return sellIn;
+    }
 
+    public int getQuality() {
+        return quality;
+    }
+
+    public void setQuality(int quality) {
+        this.quality = quality;
+    }
 }
