@@ -3,6 +3,8 @@ package com.gildedrose.control.quality;
 import com.gildedrose.Item;
 
 public class AgedBrieQualityControl implements QualityControl {
+
+
     @Override
     public boolean isApplicable(Item item) {
         return item.isAgedBrie();
@@ -15,6 +17,9 @@ public class AgedBrieQualityControl implements QualityControl {
     }
 
     private int getIncreasedQuality(int quality) {
-        return quality + 1;
+        if (quality < MAX_QUALITY_ALLOWED) {
+            return quality + STANDARD_QUALITY_RISE;
+        }
+        return quality;
     }
 }

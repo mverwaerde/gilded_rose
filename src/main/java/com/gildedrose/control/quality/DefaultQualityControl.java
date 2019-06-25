@@ -2,8 +2,6 @@ package com.gildedrose.control.quality;
 
 import com.gildedrose.Item;
 
-import java.util.Optional;
-
 public class DefaultQualityControl implements QualityControl {
 
     private static int DROP_QUALITY_VALUE = 1;
@@ -19,14 +17,10 @@ public class DefaultQualityControl implements QualityControl {
     }
 
     private int getUpdatedQuality(Item item) {
-        return Optional.of(item)
-                .map(Item::getQuality)
-                .filter(this::isPositiveOrNull)
-                .orElse(item.getQuality() - dropQualityValue(item));
-    }
-
-    private boolean isPositiveOrNull(Integer quality) {
-        return quality <= 0;
+        if (item.hasPositiveQuality()) {
+            return item.getQuality() - dropQualityValue(item);
+        }
+        return item.getQuality();
     }
 
     private int dropQualityValue(Item item) {

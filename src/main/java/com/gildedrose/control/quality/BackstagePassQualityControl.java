@@ -8,7 +8,6 @@ public class BackstagePassQualityControl implements QualityControl {
     public static final int TWO_EXTRA_QUALITY = 2;
     public static final int NO_EXTRA_QUALITY = 0;
     public static final int RESET_QUALITY = 0;
-    public static final int STANDARD_QUALITY_RISE = 1;
 
     @Override
     public boolean isApplicable(Item item) {
@@ -17,8 +16,10 @@ public class BackstagePassQualityControl implements QualityControl {
 
     @Override
     public void updateQualityFor(Item item) {
-        int updatedQuality = getUpdatedQuality(item);
-        item.setQuality(updatedQuality);
+        if (item.hasLowerQualityThanMaxAuthorizedQuality()) {
+            int updatedQuality = getUpdatedQuality(item);
+            item.setQuality(updatedQuality);
+        }
     }
 
     private int getUpdatedQuality(Item item) {
