@@ -72,7 +72,7 @@ public class Item {
     }
 
     public boolean hasSellInExpired() {
-        return this.sellIn < 0;
+        return this.sellIn <= 0;
     }
 
     public void decreaseSellInDays() {
