@@ -23,4 +23,11 @@ public class AgedBrieQualityControlTest {
         assertThat(agedBrie.getQuality()).isEqualTo(3);
     }
 
+    @Test
+    public void shouldNotIncreaseQualityMoreThanMaxQuality() {
+        Item agedBrie = new Item("Aged Brie", 1, 50);
+        agedBrieQualityControl.updateQualityFor(agedBrie);
+        assertThat(agedBrie.getQuality()).isEqualTo(50);
+    }
+
 }

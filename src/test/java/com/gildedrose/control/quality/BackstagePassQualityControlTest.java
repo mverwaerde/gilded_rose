@@ -45,4 +45,11 @@ public class BackstagePassQualityControlTest {
         backstagePassQualityControl.updateQualityFor(backStagePass);
         assertThat(backStagePass.getQuality()).isEqualTo(2);
     }
+
+    @Test
+    public void shouldNotIncreaseMoreThanMaxQualityAllowed() {
+        Item backStagePass = new Item("Backstage passes to a TAFKAL80ETC concert", 12, 50);
+        backstagePassQualityControl.updateQualityFor(backStagePass);
+        assertThat(backStagePass.getQuality()).isEqualTo(50);
+    }
 }
